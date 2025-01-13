@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/FC4E-CAT/fc4e-cat-api:
+      branch: devel
+      repo: https://github.com/FC4E-CAT/fc4e-cat-api
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/FC4E-CAT/fc4e-cat-api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-denim-capybara.sh
+        container: qc.acc_wheezy-scarlet-gibbon
+  QC.Doc:
+    repos:
+      github.com/FC4E-CAT/fc4e-cat-api find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-buff-flounder.sh
+        container: qc.doc_woolly-maroon-antelope
+      github.com/FC4E-CAT/fc4e-cat-api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-lime-horse.sh
+        container: qc.doc_leaky-sangria-terrier
+      github.com/FC4E-CAT/fc4e-cat-api markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-khaki-kingfisher.sh
+        container: qc.doc_homey-magnolia-zebra
+  QC.Lic:
+    repos:
+      github.com/FC4E-CAT/fc4e-cat-api licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-peach-bordeaux.sh
+        container: qc.lic_squirrely-buff-barracuda
+  QC.Sty:
+    repos:
+      github.com/FC4E-CAT/fc4e-cat-api checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-bronze-avocet.sh
+        container: qc.sty_lousy-purple-coral
+      github.com/FC4E-CAT/fc4e-cat-api jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-rose-saola.sh
+        container: qc.sty_hasty-zucchini-slug
+  QC.Ver:
+    repos:
+      github.com/FC4E-CAT/fc4e-cat-api get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-crimson-termite.sh
+        container: qc.ver_lanky-chestnut-albatross
+timeout: 5400
